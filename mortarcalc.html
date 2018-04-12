@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+var mortarColumn ;
+var mortarColumnValue;
+// mortarColumnValue gives numerical value to mortar column
+var mortarRow;
+var mortarKeyPad;
+var mortarKeyPadValue;
+// this variable is the mortarkeypad in subkeys
+var mortarKeyPadValueX;
+var mortarSubKeyPad;
+// variables for the mortar position
+var targetColumn;
+var targetColumnValue;
+// same as mortarColumnValue
+var targetRow;
+var targetKeyPad;
+var targetKeyPadValue;
+//same as mortarKeyPadValue
+var targetSubKeyPad;
+// variables for the target position
+var XValue;
+var YValue;
+var CValue;
+var theta;
+//variables for the distance between the mortar and target
+
+// function getFormValues(thisList){
+// 	// variables made inside a function are a local scope, they only live inside the function...
+// 	var mortarColumn = document.getElementById("mortarColumn").value;
+// 	var mortarRow = document.getElementById("mortarRow").value;
+// 	var mortarKeyPad = document.getElementById("mortarKeyPad").value;
+// 	var mortarSubKeyPad = document.getElementById("mortarSubKeyPad").value;
+// 	var targetColumn = document.getElementById("targetColumn").value;
+// 	var targetRow = document.getElementById("targetRow").value;
+// 	var targetKeyPad = document.getElementById("targetKeyPad").value;
+// 	var targetSubKeyPad = document.getElementById("targetSubKeyPad").value;
+// 	// gives values inputed from text boxes into variables 
+// 	thisList[0] = mortarColumn;
+// 	thisList[1] = mortarRow;
+// 	thisList[2] = mortarKeyPad;
+// 	thisList[3] = mortarSubKeyPad;
+// 	thisList[4] = targetColumn;
+// 	thisList[5] = targetRow;
+// 	thisList[6] = targetKeyPad;
+// 	thisList[7] = targetSubKeyPad;
+// 	// this makes a list of all the variables so they persist into other functions
+// 	// end of function 
+// }
+
+
+
+function mortarCalc(){
+	var myList = []
+	// call the function and pass it a list 
+	// getFormValues(myList);
+	// console.log(myList[0]);
+	//this used to import variables from the getFormValues function
+	var mortarColumn = document.getElementById("mortarColumn").value;
+	var mortarRow = document.getElementById("mortarRow").value;
+	var mortarKeyPad = document.getElementById("mortarKeyPad").value;
+	var mortarSubKeyPad = document.getElementById("mortarSubKeyPad").value;
+	var targetColumn = document.getElementById("targetColumn").value;
+	var targetRow = document.getElementById("targetRow").value;
+	var targetKeyPad = document.getElementById("targetKeyPad").value;
+	var targetSubKeyPad = document.getElementById("targetSubKeyPad").value;
+	// gives values inputed from text boxes into variables 
+	if (mortarColumn == "A"){
+		mortarColumnValue = 9;
+		//value set to 9 so that I can caluclate with subkeys same for other column values eg. B = 18
+	}
+	else if (mortarColumn == "B"){
+		mortarColumnValue = 18;
+	}
+	else if (mortarColumn == "C"){
+		mortarColumnValue = 27;
+	}
+	else if (mortarColumn == "D"){
+		mortarColumnValue = 36;
+	}
+	else if (mortarColumn == "E"){
+		mortarColumnValue = 45;
+	}
+	else if (mortarColumn == "F"){
+		mortarColumnValue = 54;
+	}
+	else if (mortarColumn == "G"){
+		mortarColumnValue = 63;
+	}
+	else if (mortarColumn == "H"){
+		mortarColumnValue = 72;
+	}
+	//not working because condition in if statement changes variable value *edit fixed by adding another =
+	//==========================================target===============================================
+	if (targetColumn == "A"){
+		targetColumnValue = 9;
+	}
+	else if (targetColumn == "B"){
+		targetColumnValue = 18;
+	}
+	else if (targetColumn == "C"){
+		targetColumnValue = 27;
+	}
+	else if (targetColumn == "D"){
+		targetColumnValue = 36;
+	}
+	else if (targetColumn == "E"){
+		targetColumnValue = 45;
+	}
+	else if (targetColumn == "F"){
+		targetColumnValue = 54;
+	}
+	else if (targetColumn == "G"){
+		targetColumnValue = 63;
+	}
+	else if (targetColumn == "H"){
+		targetColumnValue = 72;
+	}
+	//code turns column input into numerical values based on how many subkeys they represent eg. one grid = 9X9 subkeygrid
+//=============================================finding the XValue=============================================
+	if (mortarKeyPad == 1) {
+		mortarKeyPadValue = 3;
+	}
+	else if (mortarKeyPad == 4) {
+		mortarKeyPadValue = 3;
+	}
+	else if (mortarKeyPad == 7) {
+		mortarKeyPadValue = 3;
+	}
+	else if (mortarKeyPad == 2) {
+		mortarKeyPadValue = 6;
+	}
+	else if (mortarKeyPad == 5) {
+		mortarKeyPadValue = 6;
+	}
+	else if (mortarKeyPad == 8) {
+		mortarKeyPadValue = 6;
+	}
+	else if (mortarKeyPad == 3) {
+		mortarKeyPadValue = 9;
+	}
+	else if (mortarKeyPad == 6) {
+		mortarKeyPadValue = 9;
+	}
+	else if (mortarKeyPad == 9) {
+		mortarKeyPadValue = 9;
+	}
+	console.log("keypadval before " + mortarKeyPadValue)
+	var mortarKeyPadValue = mortarKeyPadValue + mortarSubKeyPad;
+	//something in this line is multiplying the mortarKeyPadValue by 10
+	//addes subkeys in mortarKeyPad to it's own variable and adds subkeys to that
+	console.log("keypadvalue " + mortarKeyPadValue);
+	console.log("subkeys " + mortarSubKeyPad);
+	if (targetKeyPad == 1) {
+		targetKeyPadValue = 3;
+	}	
+	else if (targetKeyPad == 2) {
+		targetKeyPadValue = 6;
+	}
+	var targetKeyPadValue = targetKeyPadValue + targetSubKeyPad; 
+	//addes subkeys in targetKeyPad to it's own variable and adds subkeys to that
+	console.log("columnval " + mortarColumnValue);
+	var mortarColumnValue = mortarColumnValue + mortarKeyPadValue;
+	var targetColumnValue = targetColumnValue + targetKeyPadValue;
+	//addes all keypad values to column values
+	var XValue = Math.abs(mortarColumnValue - targetColumnValue);
+	//this code calculates the difference between the Column Values and keypad values added together
+	//no no use with keypads and subkeys translating into x and y values
+	
+	console.log("Xvalue " + XValue);
+}
+
+</script>
+
+
+</head>
+
+<!-- ============================HTML code================================== -->
+
+
+<body>
+
+<h4>Input your mortars position</h4>
+<form>
+
+<input type="text" id="mortarColumn" value="Column">
+<input type="text" id="mortarRow" value="Row">
+<input type="text" id="mortarKeyPad" value="KeyPad">
+<input type="text" id="mortarSubKeyPad" value="SubKeyPad">
+<!-- this is where the code will get the position of the mortar -->
+<h4>Input target position</h4>
+<input type="text" id="targetColumn" value="Column">
+<input type="text" id="targetRow" value="Row">
+<input type="text" id="targetKeyPad" value="KeyPad">
+<input type="text" id="targetSubKeyPad" value="SubKeyPad">
+<!-- this is where the code gets the targets position -->
+<br><br>
+</form>
+
+<button onclick="mortarCalc()"> Calculate </button>
+
+
+
+</body>
+
+</html>
