@@ -5,20 +5,24 @@
 var mortarColumn ;
 var mortarColumnValue;
 // mortarColumnValue gives numerical value to mortar column
+var mortarColumnValueFinal;
 var mortarRow;
 var mortarKeyPad;
 var mortarKeyPadValue;
 // this variable is the mortarkeypad in subkeys
+var mortarKeyPadValueInt;
 var mortarKeyPadValueX;
 var mortarSubKeyPad;
 // variables for the mortar position
 var targetColumn;
 var targetColumnValue;
 // same as mortarColumnValue
+var targetColumnValueFinal;
 var targetRow;
 var targetKeyPad;
 var targetKeyPadValue;
 //same as mortarKeyPadValue
+var targetKeyPadValueX;
 var targetSubKeyPad;
 // variables for the target position
 var XValue;
@@ -147,25 +151,64 @@ function mortarCalc(){
 	else if (mortarKeyPad == 9) {
 		mortarKeyPadValue = 9;
 	}
+	else if (mortarKeyPad == 0) {
+		mortarKeyPadValue = 0;
+	}
+	var mortarKeyPadValueInt = parseInt(mortarKeyPadValue);
+	var mortarSubKeyPadInt = parseInt(mortarSubKeyPad);
 	console.log("keypadval before " + mortarKeyPadValue)
-	var mortarKeyPadValue = mortarKeyPadValue + mortarSubKeyPad;
+	var mortarKeyPadValueX = mortarKeyPadValueInt + mortarSubKeyPadInt;
 	//something in this line is multiplying the mortarKeyPadValue by 10
 	//addes subkeys in mortarKeyPad to it's own variable and adds subkeys to that
-	console.log("keypadvalue " + mortarKeyPadValue);
-	console.log("subkeys " + mortarSubKeyPad);
+	console.log("keypadvalue " + mortarKeyPadValueX);
+	console.log("subkeys " + mortarSubKeyPadInt);
 	if (targetKeyPad == 1) {
 		targetKeyPadValue = 3;
-	}	
+	}
+	else if (targetKeyPad == 4) {
+		targetKeyPadValue = 3;
+	}
+	else if (targetKeyPad == 7) {
+		targetKeyPadValue = 3;
+	}
 	else if (targetKeyPad == 2) {
 		targetKeyPadValue = 6;
 	}
-	var targetKeyPadValue = targetKeyPadValue + targetSubKeyPad; 
+	else if (targetKeyPad == 5) {
+		targetKeyPadValue = 6;
+	}
+	else if (targetKeyPad == 8) {
+		targetKeyPadValue = 6;
+	}
+	else if (targetKeyPad == 3) {
+		targetKeyPadValue = 9;
+	}
+	else if (targetKeyPad == 6) {
+		targetKeyPadValue = 9;
+	}
+	else if (targetKeyPad == 9) {
+		targetKeyPadValue = 9;
+	}
+	else if (targetKeyPad == 0) {
+		targetKeyPadValue = 0;
+	}
+	var targetKeyPadValueInt = parseInt(targetKeyPadValue);
+	var targetSubKeyPadInt = parseInt(targetSubKeyPad);
+	var targetKeyPadValueX = targetKeyPadValueInt + targetSubKeyPadInt; 
+	//didn't fucking parse the int on this line 
 	//addes subkeys in targetKeyPad to it's own variable and adds subkeys to that
-	console.log("columnval " + mortarColumnValue);
-	var mortarColumnValue = mortarColumnValue + mortarKeyPadValue;
-	var targetColumnValue = targetColumnValue + targetKeyPadValue;
-	//addes all keypad values to column values
-	var XValue = Math.abs(mortarColumnValue - targetColumnValue);
+	console.log("mort columnval " + mortarColumnValue);
+	var mortarColumnValueInt = parseInt(mortarColumnValue);
+	var mortarColumnValueFinal = mortarColumnValueInt + mortarKeyPadValueX;
+	//this line multiplying column by 100 *edit: not anymore knock wood
+	var targetColumnValueInt = parseInt(targetColumnValue);
+	var targetColumnValueFinal = targetColumnValueInt + targetKeyPadValueX;
+	//addes all keypad values to column values *for some reason multiplying targetColumnValueFinal by 100 *solved
+	var mortarColumnValueFinalInt = parseInt(mortarColumnValueFinal);
+	var targetColumnValueFinalInt = parseInt(targetColumnValueFinal);
+	console.log("final mortarInt " + mortarColumnValueFinalInt);
+	console.log("final targetInt " + targetColumnValueFinalInt);
+	var XValue = Math.abs(mortarColumnValueFinalInt - targetColumnValueFinalInt);
 	//this code calculates the difference between the Column Values and keypad values added together
 	//no no use with keypads and subkeys translating into x and y values
 	
