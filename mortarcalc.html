@@ -2,16 +2,16 @@
 <html>
 <head>
 <script type="text/javascript">
-var mortarColumn ;
+var mortarColumn;
 var mortarColumnValue;
 // mortarColumnValue gives numerical value to mortar column
 var mortarColumnValueFinal;
 var mortarRow;
 var mortarKeyPad;
+var mortarKeyPadY;
 var mortarKeyPadValue;
 // this variable is the mortarkeypad in subkeys
 var mortarKeyPadValueInt;
-var mortarKeyPadValueX;
 var mortarSubKeyPad;
 // variables for the mortar position
 var targetColumn;
@@ -22,7 +22,6 @@ var targetRow;
 var targetKeyPad;
 var targetKeyPadValue;
 //same as mortarKeyPadValue
-var targetKeyPadValueX;
 var targetSubKeyPad;
 // variables for the target position
 var XValue;
@@ -30,7 +29,6 @@ var YValue;
 var CValue;
 var theta;
 //variables for the distance between the mortar and target
-
 // function getFormValues(thisList){
 // 	// variables made inside a function are a local scope, they only live inside the function...
 // 	var mortarColumn = document.getElementById("mortarColumn").value;
@@ -53,9 +51,6 @@ var theta;
 // 	// this makes a list of all the variables so they persist into other functions
 // 	// end of function 
 // }
-
-
-
 function mortarCalc(){
 	var myList = []
 	// call the function and pass it a list 
@@ -71,6 +66,9 @@ function mortarCalc(){
 	var targetKeyPad = document.getElementById("targetKeyPad").value;
 	var targetSubKeyPad = document.getElementById("targetSubKeyPad").value;
 	// gives values inputed from text boxes into variables 
+
+//=================================================Finding X Value============================================
+
 	if (mortarColumn == "A"){
 		mortarColumnValue = 9;
 		//value set to 9 so that I can caluclate with subkeys same for other column values eg. B = 18
@@ -156,12 +154,9 @@ function mortarCalc(){
 	}
 	var mortarKeyPadValueInt = parseInt(mortarKeyPadValue);
 	var mortarSubKeyPadInt = parseInt(mortarSubKeyPad);
-	console.log("keypadval before " + mortarKeyPadValue)
 	var mortarKeyPadValueX = mortarKeyPadValueInt + mortarSubKeyPadInt;
 	//something in this line is multiplying the mortarKeyPadValue by 10
 	//addes subkeys in mortarKeyPad to it's own variable and adds subkeys to that
-	console.log("keypadvalue " + mortarKeyPadValueX);
-	console.log("subkeys " + mortarSubKeyPadInt);
 	if (targetKeyPad == 1) {
 		targetKeyPadValue = 3;
 	}
@@ -197,7 +192,6 @@ function mortarCalc(){
 	var targetKeyPadValueX = targetKeyPadValueInt + targetSubKeyPadInt; 
 	//didn't fucking parse the int on this line 
 	//addes subkeys in targetKeyPad to it's own variable and adds subkeys to that
-	console.log("mort columnval " + mortarColumnValue);
 	var mortarColumnValueInt = parseInt(mortarColumnValue);
 	var mortarColumnValueFinal = mortarColumnValueInt + mortarKeyPadValueX;
 	//this line multiplying column by 100 *edit: not anymore knock wood
@@ -206,15 +200,79 @@ function mortarCalc(){
 	//addes all keypad values to column values *for some reason multiplying targetColumnValueFinal by 100 *solved
 	var mortarColumnValueFinalInt = parseInt(mortarColumnValueFinal);
 	var targetColumnValueFinalInt = parseInt(targetColumnValueFinal);
-	console.log("final mortarInt " + mortarColumnValueFinalInt);
-	console.log("final targetInt " + targetColumnValueFinalInt);
 	var XValue = Math.abs(mortarColumnValueFinalInt - targetColumnValueFinalInt);
 	//this code calculates the difference between the Column Values and keypad values added together
 	//no no use with keypads and subkeys translating into x and y values
+	console.log("xval " + XValue)
 	
-	console.log("Xvalue " + XValue);
-}
 
+	//=========================================Finding Y Value============================================
+
+	//=========================mortar============================
+
+	if (mortarRow == 1) {
+		mortarRow = 9;
+	}
+	else if (mortarRow == 2) {
+		mortarRow = 18;
+	}
+	else if (mortarRow == 3) {
+		mortarRow = 27;
+	}
+	else if (mortarRow == 4) {
+		mortarRow = 36;
+	}
+	else if (mortarRow == 5) {
+		mortarRow = 45;
+	}
+	else if (mortarRow == 6) {
+		mortarRow = 54;
+	}
+	else if (mortarRow == 7) {
+		mortarRow = 63;
+	}
+	else if (mortarRow == 8) {
+		mortarRow = 72;
+	}
+	else if (mortarRow == 9) {
+		mortarRow = 80;
+	}
+
+	//======================target==============================
+
+	if (targetRow == 1) {
+		targetRow = 9;
+	}
+	else if (targetRow == 2) {
+		targetRow = 18;
+	}
+	else if (targetRow == 3) {
+		targetRow = 27;
+	}
+	else if (targetRow == 4) {
+		targetRow = 36;
+	}
+	else if (targetRow == 5) {
+		targetRow = 45;
+	}
+	else if (targetRow == 6) {
+		targetRow = 54;
+	}
+	else if (targetRow == 7) {
+		targetRow = 63;
+	}
+	else if (targetRow == 8) {
+		targetRow = 72;
+	}
+	else if (targetRow == 9) {
+		targetRow = 80;
+	}
+
+	//=========================finding XValue===============================
+
+
+
+}
 </script>
 
 
