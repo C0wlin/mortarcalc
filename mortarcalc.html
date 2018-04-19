@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<title>BLT Mortar Calc</title>
 <head>
 <script type="text/javascript">
 var mortarColumn;
@@ -8,11 +9,15 @@ var mortarColumnValue;
 var mortarColumnValueFinal;
 var mortarRow;
 var mortarKeyPad;
+var mortarKeyPadX;
 var mortarKeyPadY;
 var mortarKeyPadValue;
 // this variable is the mortarkeypad in subkeys
-var mortarKeyPadValueInt;
+var mortarKeyPadValueIntX;
+var mortarKeyPadValueIntY;
+var mortarKeyPadValueY;
 var mortarSubKeyPad;
+var mortarSubKeyPadX;
 // variables for the mortar position
 var targetColumn;
 var targetColumnValue;
@@ -66,9 +71,7 @@ function mortarCalc(){
 	var targetKeyPad = document.getElementById("targetKeyPad").value;
 	var targetSubKeyPad = document.getElementById("targetSubKeyPad").value;
 	// gives values inputed from text boxes into variables 
-
 //=================================================Finding X Value============================================
-
 	if (mortarColumn == "A"){
 		mortarColumnValue = 9;
 		//value set to 9 so that I can caluclate with subkeys same for other column values eg. B = 18
@@ -121,6 +124,68 @@ function mortarCalc(){
 		targetColumnValue = 72;
 	}
 	//code turns column input into numerical values based on how many subkeys they represent eg. one grid = 9X9 subkeygrid
+
+	//=========================================subkeypads=======================================================
+
+	//code changes subkeys so the properly give value for X
+	
+	if (mortarSubKeyPad == 1) {
+		mortarSubKeyPadX = 1;
+	}
+	else if (mortarSubKeyPad == 4) {
+		mortarSubKeyPadX = 1;
+	}
+	else if (mortarSubKeyPad == 7) {
+		mortarSubKeyPadX = 1;
+	}
+	else if (mortarSubKeyPad == 2) {
+		mortarSubKeyPadX = 2;
+	}
+	else if (mortarSubKeyPad == 5) {
+		mortarSubKeyPadX = 2;
+	}
+	else if (mortarSubKeyPad == 8) {
+		mortarSubKeyPadX = 2;
+	}
+	else if (mortarSubKeyPad == 3) {
+		mortarSubKeyPadX = 3;
+	}
+	else if (mortarSubKeyPad == 6) {
+		mortarSubKeyPadX = 3;
+	}
+	else if (mortarSubKeyPad == 9) {
+		mortarSubKeyPadX = 3;
+	}
+
+	//now for target
+
+	if (targetSubKeyPad == 1) {
+		targetSubKeyPadX = 1;
+	}
+	else if (targetSubKeyPad == 4) {
+		targetSubKeyPadX = 1;
+	}
+	else if (targetSubKeyPad == 7) {
+		targetSubKeyPadX = 1;
+	}
+	else if (targetSubKeyPad == 2) {
+		targetSubKeyPadX = 2;
+	}
+	else if (targetSubKeyPad == 5) {
+		targetSubKeyPadX = 2;
+	}
+	else if (targetSubKeyPad == 8) {
+		targetSubKeyPadX = 2;
+	}
+	else if (targetSubKeyPad == 3) {
+		targetSubKeyPadX = 3;
+	}
+	else if (targetSubKeyPad == 6) {
+		targetSubKeyPadX = 3;
+	}
+	else if (targetSubKeyPad == 9) {
+		targetSubKeyPadX = 3;
+	}
 //=============================================finding the XValue=============================================
 	if (mortarKeyPad == 1) {
 		mortarKeyPadValue = 3;
@@ -152,10 +217,10 @@ function mortarCalc(){
 	else if (mortarKeyPad == 0) {
 		mortarKeyPadValue = 0;
 	}
-	var mortarKeyPadValueInt = parseInt(mortarKeyPadValue);
-	var mortarSubKeyPadInt = parseInt(mortarSubKeyPad);
-	var mortarKeyPadValueX = mortarKeyPadValueInt + mortarSubKeyPadInt;
-	//something in this line is multiplying the mortarKeyPadValue by 10
+	var mortarKeyPadValueIntX = parseInt(mortarKeyPadValue);
+	var mortarSubKeyPadIntX = parseInt(mortarSubKeyPadX);
+	var mortarKeyPadValueX = mortarKeyPadValueIntX + mortarSubKeyPadIntX;
+	//something in this line is multiplying the mortarKeyPadValue by 10 *edit: fixed was problem with integers
 	//addes subkeys in mortarKeyPad to it's own variable and adds subkeys to that
 	if (targetKeyPad == 1) {
 		targetKeyPadValue = 3;
@@ -187,9 +252,9 @@ function mortarCalc(){
 	else if (targetKeyPad == 0) {
 		targetKeyPadValue = 0;
 	}
-	var targetKeyPadValueInt = parseInt(targetKeyPadValue);
-	var targetSubKeyPadInt = parseInt(targetSubKeyPad);
-	var targetKeyPadValueX = targetKeyPadValueInt + targetSubKeyPadInt; 
+	var targetKeyPadValueIntX = parseInt(targetKeyPadValue);
+	var targetSubKeyPadIntX = parseInt(targetSubKeyPadX);
+	var targetKeyPadValueX = targetKeyPadValueIntX + targetSubKeyPadIntX; 
 	//didn't fucking parse the int on this line 
 	//addes subkeys in targetKeyPad to it's own variable and adds subkeys to that
 	var mortarColumnValueInt = parseInt(mortarColumnValue);
@@ -205,11 +270,8 @@ function mortarCalc(){
 	//no no use with keypads and subkeys translating into x and y values
 	console.log("xval " + XValue)
 	
-
 	//=========================================Finding Y Value============================================
-
 	//=========================mortar============================
-
 	if (mortarRow == 1) {
 		mortarRow = 9;
 	}
@@ -237,9 +299,7 @@ function mortarCalc(){
 	else if (mortarRow == 9) {
 		mortarRow = 80;
 	}
-
 	//======================target==============================
-
 	if (targetRow == 1) {
 		targetRow = 9;
 	}
@@ -267,10 +327,132 @@ function mortarCalc(){
 	else if (targetRow == 9) {
 		targetRow = 80;
 	}
+	//=========================subkeypad
 
-	//=========================finding XValue===============================
+	if (mortarSubKeyPad == 1) {
+		mortarSubKeyPadY = 1;
+	}
+	else if (mortarSubKeyPad == 4) {
+		mortarSubKeyPadY = 2;
+	}
+	else if (mortarSubKeyPad == 7) {
+		mortarSubKeyPadY = 3;
+	}
+	else if (mortarSubKeyPad == 2) {
+		mortarSubKeyPadY = 1;
+	}
+	else if (mortarSubKeyPad == 5) {
+		mortarSubKeyPadY = 2;
+	}
+	else if (mortarSubKeyPad == 8) {
+		mortarSubKeyPadY = 3;
+	}
+	else if (mortarSubKeyPad == 3) {
+		mortarSubKeyPadY = 1;
+	}
+	else if (mortarSubKeyPad == 6) {
+		mortarSubKeyPadY = 2;
+	}
+	else if (mortarSubKeyPad == 9) {
+		mortarSubKeyPadY = 3;
+	}
 
+	//now for target
 
+	if (targetSubKeyPad == 1) {
+		targetSubKeyPadY = 1;
+	}
+	else if (targetSubKeyPad == 4) {
+		targetSubKeyPadY = 2;
+	}
+	else if (targetSubKeyPad == 7) {
+		targetSubKeyPadY = 3;
+	}
+	else if (targetSubKeyPad == 2) {
+		targetSubKeyPadY = 1;
+	}
+	else if (targetSubKeyPad == 5) {
+		targetSubKeyPadY = 2;
+	}
+	else if (targetSubKeyPad == 8) {
+		targetSubKeyPadY = 3;
+	}
+	else if (targetSubKeyPad == 3) {
+		targetSubKeyPadY = 1;
+	}
+	else if (targetSubKeyPad == 6) {
+		targetSubKeyPadY = 2;
+	}
+	else if (targetSubKeyPad == 9) {
+		targetSubKeyPadY = 3;
+	}
+
+	//=========================finding YValue===============================
+
+	if (mortarKeyPad == 1) {
+		mortarKeyPadValueY = 3;
+	}
+	else if (mortarKeyPad == 2) {
+		mortarKeyPadValueY = 3;
+	}
+	else if (mortarKeyPad == 3) {
+		mortarKeyPadValueY = 3;
+	}
+	else if (mortarKeyPad == 4) {
+		mortarKeyPadValueY = 6;
+	}
+	else if (mortarKeyPad == 5) {
+		mortarKeyPadValueY = 6; 
+	}
+	else if (mortarKeyPad == 6) {
+		mortarKeyPadValueY = 6;
+	}
+	else if (mortarKeyPad == 7) {
+		mortarKeyPadValueY = 9;
+	}
+	else if (mortarKeyPad == 8) {
+		mortarKeyPadValueY = 9;
+	}
+	else if (mortarKeyPad == 9) {
+		mortarKeyPadValueY = 9;
+	}
+
+	var mortarKeyPadValueIntY = parseInt(mortarKeyPadValueY);
+	var mortarSubKeyPadIntY = parseInt(mortarSubKeyPadY);
+	var mortarKeyPadValueY = mortarKeyPadValueIntY + mortarSubKeyPadIntY;
+
+	if (targetKeyPad == 1) {
+		targetKeyPadValueY = 3;
+	}
+	else if (targetKeyPad == 2) {
+		targetKeyPadValueY = 3;
+	}
+	else if (targetKeyPad == 3) {
+		targetKeyPadValueY = 3;
+	}
+	else if (targetKeyPad == 4) {
+		targetKeyPadValueY = 6;
+	}
+	else if (targetKeyPad == 5) {
+		targetKeyPadValueY = 6; 
+	}
+	else if (targetKeyPad == 6) {
+		targetKeyPadValueY = 6;
+	}
+	else if (targetKeyPad == 7) {
+		targetKeyPadValueY = 9;
+	}
+	else if (targetKeyPad == 8) {
+		targetKeyPadValueY = 9;
+	}
+	else if (targetKeyPad == 9) {
+		targetKeyPadValueY = 9;
+	}
+
+	var targetKeyPadValueIntY = parseInt(targetKeyPadValueY);
+	var targetSubKeyPadIntY = parseInt(targetSubKeyPadY);
+	var targetKeyPadValueY = targetKeyPadValueIntY + targetSubKeyPadIntY;
+	
 
 }
 </script>
