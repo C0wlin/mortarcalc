@@ -452,8 +452,68 @@ function mortarCalc(){
 	var targetKeyPadValueIntY = parseInt(targetKeyPadValueY);
 	var targetSubKeyPadIntY = parseInt(targetSubKeyPadY);
 	var targetKeyPadValueY = targetKeyPadValueIntY + targetSubKeyPadIntY;
+	var mortarRowValueInt = parseInt(mortarRow);
+	var mortarRowValueFinal = mortarRowValueInt + mortarKeyPadValueY;
+	var targetRowValueInt = parseInt(targetRow);
+	var targetRowvalueFinal = targetRowValueInt + targetKeyPadValueY;
+	var mortarRowValueFinalInt = parseInt(mortarRowValueFinal);
+	var targetRowvalueFinalInt = parseInt(targetRowvalueFinal);
+	var YValue = Math.abs(mortarRowValueFinalInt - targetRowvalueFinalInt);
+
+	console.log("Yval " + YValue);
+
+	//=========================CValue=================
+	var XValueInt = parseInt(XValue);
+	var YValueInt = parseInt(YValue);
+
+	var XValueSQRD = Math.pow(XValueInt, 2);
+	var YValueSQRD = Math.pow(YValueInt, 2);
+	var XValueSQRDInt = parseInt(XValueSQRD);
+	var YValueSQRDInt = parseInt(YValueSQRD);
+	var CValueSQRD = XValueSQRDInt + YValueSQRDInt;
+	var CValue = Math.sqrt(CValueSQRD);
+	console.log("Cval " + CValue);
+
+	//=======================theta===================
+
+	var XValueInt = parseInt(XValue);
+	var YValueInt = parseInt(YValue);
+	var theta = Math.atan(XValue  / YValue);
+	//this gives answers in radians
+	console.log("theta " + theta);
+	//var thetaInt = parseInt(theta);
+	//console.log("theta int " + thetaInt);
+	//commented these out because they were messing with code probably because it was a float not an int
+	var thetaDegree = theta * 57.2958;
+	console.log("theta degrees " + thetaDegree);
+
+	//=================================sub keys to meters==========================
+	var rangeMeters = CValue * 33;
+	console.log("range in meters " + rangeMeters);
 	
 
+	//=================================meters to milradians===========================
+	//probably will need if else statements for all ranges and just brute force it
+	if (0 <= rangeMeters <= 50) {
+		rangeMilRadians = 1579;
+	}
+	else if (50 < rangeMeters <= 100) {
+		rangeMilRadians = rangeMeters * 0.42;
+	}
+	else if (100 < rangeMeters <= 150) {
+		rangeMilRadians = rangeMeters * 0.4;
+	}
+	else if (150 < rangeMeters <= 200) {
+		rangeMilRadians = rangeMeters * 0.42; 
+	}
+	else if (200 < rangeMeters <= 250) {
+		rangeMilRadians = rangeMeters * 0.42; 
+	}
+	else if (250 < rangeMeters <= 300) {
+		rangeMilRadians = rangeMeters * 0.42; 
+	}
+
+	console.log("range in milradians " + rangeMilRadians);
 }
 </script>
 
